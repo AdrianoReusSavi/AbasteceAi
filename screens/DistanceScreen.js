@@ -79,7 +79,7 @@ export default function DistanceScreen({ route, navigation }) {
                 { title: "Salvar", onPress: handleSave },
                 { title: "Limpar", onPress: handleClear }
             ]} />
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }] }} descriptors={{}} navigation={navigation} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }

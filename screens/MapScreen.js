@@ -72,7 +72,7 @@ export default function MapScreen({ navigation }) {
                     <Text style={styles.buttonText}>Limpar</Text>
                 </TouchableOpacity>
             </View>
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }] }} descriptors={{}} navigation={navigation} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }

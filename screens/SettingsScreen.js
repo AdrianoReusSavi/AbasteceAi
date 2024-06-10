@@ -1,6 +1,7 @@
 ﻿import React, { useState, useEffect } from 'react';
 import { StyleSheet, View, Alert } from 'react-native';
-import { saveConfig, loadConfig, clearTrips } from '../services/configService';
+import { saveConfig, loadConfig } from '../services/configService';
+import { clearTrips } from '../services/tripService';
 import InputField from '../components/InputField';
 import ButtonGroup from '../components/ButtonGroup';
 import BottomTabBar from '../components/BottomTabBar';
@@ -36,8 +37,8 @@ export default function SettingsScreen({ navigation }) {
         <View style={styles.container}>
             <InputField label="Preço da Gasolina (R$/L):" value={fuelPrice} onChangeText={setFuelPrice} keyboardType="numeric" />
             <InputField label="Consumo do Veículo (km/L):" value={kmPerLiter} onChangeText={setKmPerLiter} keyboardType="numeric" />
-            <ButtonGroup buttons={[{ title: "Salvar Configurações", onPress: handleSaveConfig }, { title: "Limpar Histórico", onPress: handleClearHistory }]} />
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
+            <ButtonGroup buttons={[{ title: "Salvar", onPress: handleSaveConfig }, { title: "Limpar Histórico", onPress: handleClearHistory }]} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }

@@ -40,7 +40,7 @@ export default function HistoryScreen({ navigation }) {
                     </View>
                 )}
             />
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }] }} descriptors={{}} navigation={navigation} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }
