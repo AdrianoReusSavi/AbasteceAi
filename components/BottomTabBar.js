@@ -28,7 +28,7 @@ const BottomTabBar = ({ state, descriptors, navigation }) => {
 
                 return (
                     <TouchableOpacity
-                        key={index}
+                        key={route.key}
                         onPress={onPress}
                         style={[styles.tabItem, { backgroundColor: isFocused ? '#eee' : '#fff' }]}
                     >

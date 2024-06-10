@@ -6,7 +6,7 @@ import BottomTabBar from '../components/BottomTabBar';
 
 const formatDate = (date) => {
     const options = { year: 'numeric', month: 'long', day: 'numeric', hour: '2-digit', minute: '2-digit' };
-    return new Date(date.seconds * 1000).toLocaleDateString(undefined, options);
+    return new Date(date.seconds * 1000).toLocaleString('pt-BR', options);
 };
 
 export default function HistoryScreen({ navigation }) {
@@ -40,7 +40,7 @@ export default function HistoryScreen({ navigation }) {
                     </View>
                 )}
             />
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Cálculo de Distância' }, { name: 'Histórico' }] }} descriptors={{}} navigation={navigation} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }

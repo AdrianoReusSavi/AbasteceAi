@@ -1,8 +1,8 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native';
-import MapView, { Marker, Polyline } from 'react-native-maps';
+import { StyleSheet, View, TouchableOpacity, Text, Alert } from 'react-native';
 import axios from 'axios';
 import * as Location from 'expo-location';
+import MapComponent from '../components/MapComponent';
 import BottomTabBar from '../components/BottomTabBar';
 
 export default function MapScreen({ navigation }) {
@@ -11,13 +11,12 @@ export default function MapScreen({ navigation }) {
     const [selectingOrigin, setSelectingOrigin] = useState(true);
     const [routeCoords, setRouteCoords] = useState([]);
     const [location, setLocation] = useState(null);
-    const [errorMsg, setErrorMsg] = useState(null);
 
     useEffect(() => {
         (async () => {
             let { status } = await Location.requestForegroundPermissionsAsync();
             if (status !== 'granted') {
-                setErrorMsg('Permissão para acessar a localização negada');
+                Alert.alert('Permissão para acessar a localização negada');
                 return;
             }
 
@@ -59,45 +58,15 @@ export default function MapScreen({ navigation }) {
         }
     };
 
-    if (!location) {
-        return <Text>Carregando...</Text>;
-    }
-
     return (
         <View style={styles.container}>
-            <MapView
-                style={styles.map}
-                initialRegion={{
-                    latitude: location.coords.latitude,
-                    longitude: location.coords.longitude,
-                    latitudeDelta: 0.0922,
-                    longitudeDelta: 0.0421,
-                }}
-                showsUserLocation={true}
+            <MapComponent
+                location={location}
+                origin={origin}
+                destination={destination}
+                routeCoords={routeCoords}
                 onPress={handleMapPress}
-            >
-                {origin && (
-                    <Marker
-                        coordinate={origin}
-                        title="Origem"
-                        pinColor="green"
-                    />
-                )}
-                {destination && (
-                    <Marker
-                        coordinate={destination}
-                        title="Destino"
-                        pinColor="red"
-                    />
-                )}
-                {routeCoords.length > 0 && (
-                    <Polyline
-                        coordinates={routeCoords}
-                        strokeColor="hotpink"
-                        strokeWidth={3}
-                    />
-                )}
-            </MapView>
+            />
             <View style={styles.buttonContainer}>
                 <TouchableOpacity style={styles.button} onPress={handleClear}>
                     <Text style={styles.buttonText}>Limpar</Text>
@@ -110,9 +79,6 @@ export default function MapScreen({ navigation }) {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-    },
-    map: {
         flex: 1,
     },
     buttonContainer: {

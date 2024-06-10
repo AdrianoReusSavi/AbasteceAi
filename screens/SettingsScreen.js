@@ -1,9 +1,11 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
-import { saveConfig, loadConfig } from '../services/configService';
-import { clearTrips } from '../services/tripService';
+import { StyleSheet, View, Alert } from 'react-native';
+import { saveConfig, loadConfig, clearTrips } from '../services/configService';
+import InputField from '../components/InputField';
+import ButtonGroup from '../components/ButtonGroup';
+import BottomTabBar from '../components/BottomTabBar';
 
-export default function SettingsScreen() {
+export default function SettingsScreen({ navigation }) {
     const [fuelPrice, setFuelPrice] = useState('');
     const [kmPerLiter, setKmPerLiter] = useState('');
 
@@ -18,36 +20,24 @@ export default function SettingsScreen() {
 
     const handleSaveConfig = async () => {
         await saveConfig({ fuelPrice, kmPerLiter });
-        alert('Configurações salvas com sucesso!');
+        Alert.alert('Configurações salvas com sucesso!');
     };
 
     const handleClearHistory = async () => {
         try {
             await clearTrips();
-            alert('Histórico limpo com sucesso!');
+            Alert.alert('Histórico limpo com sucesso!');
         } catch (error) {
-            alert('Erro ao limpar o histórico: ' + error.message);
+            Alert.alert('Erro ao limpar o histórico: ' + error.message);
         }
     };
 
     return (
         <View style={styles.container}>
-            <Text>Preço da Gasolina (R$/L):</Text>
-            <TextInput
-                style={styles.input}
-                value={fuelPrice}
-                onChangeText={setFuelPrice}
-                keyboardType="numeric"
-            />
-            <Text>Consumo do Veículo (km/L):</Text>
-            <TextInput
-                style={styles.input}
-                value={kmPerLiter}
-                onChangeText={setKmPerLiter}
-                keyboardType="numeric"
-            />
-            <Button title="Salvar Configurações" onPress={handleSaveConfig} />
-            <Button title="Limpar Histórico" onPress={handleClearHistory} />
+            <InputField label="Preço da Gasolina (R$/L):" value={fuelPrice} onChangeText={setFuelPrice} keyboardType="numeric" />
+            <InputField label="Consumo do Veículo (km/L):" value={kmPerLiter} onChangeText={setKmPerLiter} keyboardType="numeric" />
+            <ButtonGroup buttons={[{ title: "Salvar Configurações", onPress: handleSaveConfig }, { title: "Limpar Histórico", onPress: handleClearHistory }]} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'Settings' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }
@@ -58,13 +48,5 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         padding: 20,
-    },
-    input: {
-        height: 40,
-        width: '80%',
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
     },
 });

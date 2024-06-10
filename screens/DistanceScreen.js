@@ -1,8 +1,10 @@
 ﻿import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TextInput, Button } from 'react-native';
+import { StyleSheet, View, Alert } from 'react-native';
 import BottomTabBar from '../components/BottomTabBar';
 import { addTrip } from '../services/tripService';
 import { loadConfig } from '../services/configService';
+import InputField from '../components/InputField';
+import ButtonGroup from '../components/ButtonGroup';
 
 export default function DistanceScreen({ route, navigation }) {
     const [distance, setDistance] = useState(route.params?.distance?.toFixed(2).toString() ?? '');
@@ -56,51 +58,28 @@ export default function DistanceScreen({ route, navigation }) {
             };
             try {
                 await addTrip(tripData);
-                alert('Viagem salva com sucesso!');
+                Alert.alert('Viagem salva com sucesso!');
                 handleClear();
             } catch (error) {
-                alert('Erro ao salvar a viagem: ' + error.message);
+                Alert.alert('Erro ao salvar a viagem: ' + error.message);
             }
         } else {
-            alert('Por favor, preencha todos os campos antes de salvar.');
+            Alert.alert('Por favor, preencha todos os campos antes de salvar.');
         }
     };
 
     return (
         <View style={styles.container}>
-            <Text>Distância (km):</Text>
-            <TextInput
-                style={styles.input}
-                value={distance}
-                onChangeText={setDistance}
-                keyboardType="numeric"
-            />
-            <Text>Preço da Gasolina (R$/L):</Text>
-            <TextInput
-                style={styles.input}
-                value={fuelPrice}
-                onChangeText={setFuelPrice}
-                keyboardType="numeric"
-            />
-            <Text>Consumo do Veículo (km/L):</Text>
-            <TextInput
-                style={styles.input}
-                value={kmPerLiter}
-                onChangeText={setKmPerLiter}
-                keyboardType="numeric"
-            />
-            <Text>Custo Estimado (R$):</Text>
-            <TextInput
-                style={styles.input}
-                value={totalCost}
-                editable={false}
-            />
-            <View style={styles.buttonContainer}>
-                <Button title="Calcular Custo" onPress={calculateCost} />
-                <Button title="Salvar" onPress={handleSave} />
-                <Button title="Limpar" onPress={handleClear} />
-            </View>
-            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Cálculo de Distância' }, { name: 'Histórico' }] }} descriptors={{}} navigation={navigation} />
+            <InputField label="Distância (km):" value={distance} onChangeText={setDistance} keyboardType="numeric" />
+            <InputField label="Preço da Gasolina (R$/L):" value={fuelPrice} onChangeText={setFuelPrice} keyboardType="numeric" />
+            <InputField label="Consumo do Veículo (km/L):" value={kmPerLiter} onChangeText={setKmPerLiter} keyboardType="numeric" />
+            <InputField label="Custo Estimado (R$):" value={totalCost} editable={false} />
+            <ButtonGroup buttons={[
+                { title: "Calcular Custo", onPress: calculateCost },
+                { title: "Salvar", onPress: handleSave },
+                { title: "Limpar", onPress: handleClear }
+            ]} />
+            <BottomTabBar state={{ routes: [{ name: 'Map' }, { name: 'Distance' }, { name: 'History' }] }} descriptors={{}} navigation={navigation} />
         </View>
     );
 }
@@ -110,18 +89,5 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-    },
-    input: {
-        height: 40,
-        width: '80%',
-        borderColor: 'gray',
-        borderWidth: 1,
-        marginBottom: 10,
-        paddingHorizontal: 10,
-    },
-    buttonContainer: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        width: '80%',
     },
 });
