@@ -7,6 +7,8 @@ import HistoryScreen from './screens/HistoryScreen';
 import SettingsScreen from './screens/SettingsScreen';
 import GptScreen from './screens/GptScreen';
 import BottomTabBar from './components/BottomTabBar';
+import Header from './components/Cabecalho';
+
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();

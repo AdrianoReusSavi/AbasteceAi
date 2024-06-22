@@ -7,6 +7,7 @@ import InputField from '../components/InputField';
 import ButtonGroup from '../components/ButtonGroup';
 import InputFieldConsumo from '../components/InputFieldConsumo';
 import { LongPressGestureHandler, State } from 'react-native-gesture-handler';
+import Header from './../components/Cabecalho'
 
 export default function DistanceScreen({ route, navigation }) {
     const [distance, setDistance] = useState(route.params?.distance?.toFixed(2).toString() ?? '');
