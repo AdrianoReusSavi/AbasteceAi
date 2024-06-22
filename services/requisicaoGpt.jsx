@@ -6,7 +6,7 @@ function useApiHook() {
     const [data, setData] = useState(null);
     const [error, setError] = useState(null);
 
-    const key = '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'; // Substitua pela sua chave da API
+    const key = ''; // Substitua pela sua chave da API
 
     const callApi = useCallback(async (prompt) => {
         setLoading(true);
@@ -33,6 +33,7 @@ function useApiHook() {
             });
             const result = await response.json();
             setData(result);
+            console.log(result)
         } catch (error) {
             setError(error);
         } finally {
