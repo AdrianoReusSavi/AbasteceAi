@@ -5,7 +5,7 @@ const Header = () => {
     return (
         <View style={styles.headerContainer}>
             <Image 
-                source={require('./../image/Logo.png')} // Substitua pelo caminho da sua imagem
+                source={require('./../image/Logo.png')}
                 style={styles.logo}
             />
         </View>
@@ -22,7 +22,7 @@ const styles = StyleSheet.create({
     },
     logo: {
         width: 50,
-        height: 50, // Ajuste o tamanho conforme necessário
+        height: 50,
     }
 });
 
