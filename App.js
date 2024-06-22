@@ -1,23 +1,27 @@
-﻿import React from 'react';
+﻿
+import React, { useState, useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
-import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import MapScreen from './screens/MapScreen';
-import DistanceScreen from './screens/DistanceScreen';
-import HistoryScreen from './screens/HistoryScreen';
-import SettingsScreen from './screens/SettingsScreen';
-import BottomTabBar from './components/BottomTabBar';
-
-const Tab = createBottomTabNavigator();
+import AppNavigator from './Navigation'
+import SplashScreen from './screens/SplashScreen';
 
 export default function App() {
+    const [isLoading, setIsLoading] = useState(true);
+
+    useEffect(() => {
+        const timer = setTimeout(() => {
+            setIsLoading(false);
+        }, 4000); // Exibe a tela de introdução por 2 segundos
+
+        return () => clearTimeout(timer); // Limpa o timer ao desmontar o componente
+    }, []);
+
+    if (isLoading) {
+        return <SplashScreen />;
+    }
+
     return (
         <NavigationContainer>
-            <Tab.Navigator tabBar={(props) => <BottomTabBar {...props} />}>
-                <Tab.Screen name="Map" component={MapScreen} options={{ tabBarLabel: 'Mapa' }} />
-                <Tab.Screen name="Distance" component={DistanceScreen} options={{ tabBarLabel: 'Distância' }} />
-                <Tab.Screen name="History" component={HistoryScreen} options={{ tabBarLabel: 'Histórico' }} />
-                <Tab.Screen name="Settings" component={SettingsScreen} options={{ tabBarLabel: 'Configurações' }} />
-            </Tab.Navigator>
+            <AppNavigator />
         </NavigationContainer>
     );
 }
