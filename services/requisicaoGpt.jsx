@@ -45,4 +45,3 @@ function useApiHook() {
 }
 
 export default useApiHook;
-

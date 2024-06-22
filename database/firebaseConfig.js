@@ -4,7 +4,6 @@ import { getFirestore } from 'firebase/firestore';
 import { getStorage } from 'firebase/storage';
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 
-//Vôce deve preencher esses dados
 const firebaseConfig = {
   apiKey: "",
   authDomain: "",
@@ -13,7 +12,6 @@ const firebaseConfig = {
   messagingSenderId: "",
   appId: ""
 };
-
 
 const app = initializeApp(firebaseConfig);
 const auth = initializeAuth(app, {

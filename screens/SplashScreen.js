@@ -6,7 +6,7 @@ export default function SplashScreen() {
     return (
         <View style={styles.container}>
             <Image 
-                source={require('./../image/Logo-sem-fundo.png')} // Ajuste o caminho da imagem
+                source={require('./../image/Logo-sem-fundo.png')}
                 style={styles.image}
             />
             <Text style={styles.text}>Bem-vindo ao Abastece Ai!</Text>
@@ -23,7 +23,7 @@ const styles = StyleSheet.create({
     },
     image: {
         width: 200,
-        height: 100,
+        height: 200,
         marginBottom: 20,
     },
     text: {
