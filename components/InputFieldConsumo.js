@@ -19,7 +19,7 @@ export default function InputFieldConsumo({ label, value, onChangeText, keyboard
 const styles = StyleSheet.create({
     inputContainer: {
         marginBottom: 10,
-        width: '70%',
+        width: '100%',
     },
     input: {
         height: 40,
