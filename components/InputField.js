@@ -1,30 +1,34 @@
-import React from 'react';
-import { StyleSheet, TextInput, View, Text } from 'react-native';
+import React from "react";
+import { StyleSheet } from "react-native";
+import { TextInput } from "react-native-paper";
+import { colors } from "../contants/colors";
 
-export default function InputField({ label, value, onChangeText, keyboardType = 'default', editable = true }) {
-    return (
-        <View style={styles.inputContainer}>
-            <Text>{label}</Text>
-            <TextInput
-                style={styles.input}
-                value={value}
-                onChangeText={onChangeText}
-                keyboardType={keyboardType}
-                editable={editable}
-            />
-        </View>
-    );
+export default function InputField({
+  label,
+  value,
+  onChangeText,
+  keyboardType = "default",
+  editable = true,
+  ...props
+}) {
+  return (
+    <TextInput
+      {...props}
+      value={value}
+      onChangeText={onChangeText}
+      keyboardType={keyboardType}
+      editable={editable}
+      label={label}
+      style={[styles.input, props.style]}
+      activeUnderlineColor={colors.secondary}
+      underlineColor={colors.primary}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
-    inputContainer: {
-        marginBottom: 10,
-        width: '80%',
-    },
-    input: {
-        height: 40,
-        borderColor: 'gray',
-        borderWidth: 1,
-        paddingHorizontal: 10,
-    },
+  input: {
+    width: "100%",
+    backgroundColor: "white",
+  },
 });
