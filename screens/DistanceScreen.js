@@ -5,7 +5,6 @@ import { addTrip } from "../services/tripService";
 import { loadConfig } from "../services/configService";
 import InputField from "../components/InputField";
 import ButtonGroup from "../components/ButtonGroup";
-import InputFieldConsumo from "../components/InputFieldConsumo";
 import { DefaultButton } from "../components/DefaultButton";
 import { DefaultIconButton } from "../components/IconButton";
 import { MD3Colors } from "react-native-paper";
@@ -94,31 +93,34 @@ export default function DistanceScreen({ route, navigation }) {
         keyboardType="numeric"
       />
       <InputField
+        label="Consumo do Veículo (km/L):"
+        value={kmPerLiter}
+        onChangeText={setKmPerLiter}
+        keyboardType="numeric"
+      />
+      <DefaultButton
+        mode="contained"
+        icon="table-search"
+        containerColor={"white"}
+        iconColor={colors.primary}
+        onPress={() => navigation.navigate("GptScreen")}
+      >
+        Buscar o consumo do meu veículo
+      </DefaultButton>
+      <InputField
         label="Preço da Gasolina (R$/L):"
         value={fuelPrice}
         onChangeText={setFuelPrice}
         keyboardType="numeric"
       />
-
-      <View style={styles.row}>
+      {totalCost && (
         <InputField
-          label="Consumo do Veículo (km/L):"
-          value={kmPerLiter}
-          onChangeText={setKmPerLiter}
-          keyboardType="numeric"
+          label="Custo Estimado (R$):"
+          value={totalCost}
+          editable={false}
+          disabled
         />
-        <DefaultIconButton
-          mode="contained"
-          icon="table-search"
-          iconColor={MD3Colors.neutralVariant60}
-          onPress={() => navigation.navigate("GptScreen")}
-        />
-      </View>
-      <InputField
-        label="Custo Estimado (R$):"
-        value={totalCost}
-        editable={false}
-      />
+      )}
       <View style={{ width: "80%" }}>
         <ButtonGroup
           buttons={[
@@ -163,7 +165,6 @@ const styles = StyleSheet.create({
     flexDirection: "column",
     alignItems: "center",
   },
-  input: { width: "80%", marginTop: 20 },
   row: {
     flexDirection: "row",
     alignItems: "center",

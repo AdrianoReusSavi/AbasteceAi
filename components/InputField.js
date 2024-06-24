@@ -21,9 +21,8 @@ export default function InputField({
         keyboardType={keyboardType}
         editable={editable}
         label={label}
-        style={{ backgroundColor: "white" }}
+        style={[{ backgroundColor: "white" }, { ...props.style }]}
         activeUnderlineColor={colors.secondary}
-        placeholderTextColor={"#00ee"}
         underlineColor={colors.primary}
       />
     </View>

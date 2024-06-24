@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Button } from "react-native";
 import { DefaultButton } from "./DefaultButton";
+import { colors } from "../contants/colors";
 
 export default function ButtonGroup({ buttons }) {
   return (
