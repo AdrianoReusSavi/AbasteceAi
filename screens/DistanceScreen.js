@@ -7,6 +7,9 @@ import InputField from "../components/InputField";
 import ButtonGroup from "../components/ButtonGroup";
 import InputFieldConsumo from "../components/InputFieldConsumo";
 import { DefaultButton } from "../components/DefaultButton";
+import { DefaultIconButton } from "../components/IconButton";
+import { MD3Colors } from "react-native-paper";
+import { colors } from "../contants/colors";
 
 export default function DistanceScreen({ route, navigation }) {
   const [distance, setDistance] = useState(
@@ -104,23 +107,37 @@ export default function DistanceScreen({ route, navigation }) {
           onChangeText={setKmPerLiter}
           keyboardType="numeric"
         />
-        <DefaultButton onPress={() => navigation.navigate("GptScreen")}>
-          Buscar
-        </DefaultButton>
+        <DefaultIconButton
+          mode="contained"
+          icon="table-search"
+          iconColor={MD3Colors.neutralVariant60}
+          onPress={() => navigation.navigate("GptScreen")}
+        />
       </View>
-
       <InputField
         label="Custo Estimado (R$):"
         value={totalCost}
         editable={false}
       />
-      <ButtonGroup
-        buttons={[
-          { title: "Calcular Custo", onPress: calculateCost },
-          { title: "Salvar", onPress: handleSave },
-          { title: "Limpar", onPress: handleClear },
-        ]}
-      />
+      <View style={{ width: "80%" }}>
+        <ButtonGroup
+          buttons={[
+            { title: "Calcular Custo", onPress: calculateCost },
+            { title: "Salvar", onPress: handleSave },
+          ]}
+        />
+      </View>
+
+      <DefaultButton
+        style={{
+          width: "80%",
+          borderRadius: 4,
+          backgroundColor: colors.danger,
+        }}
+        onPress={handleClear}
+      >
+        Limpar
+      </DefaultButton>
       <BottomTabBar
         state={{
           routes: [
@@ -139,15 +156,18 @@ export default function DistanceScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    justifyContent: "center",
+    width: "100%",
+    marginTop: 20,
+    gap: 10,
+    display: "flex",
+    flexDirection: "column",
     alignItems: "center",
   },
+  input: { width: "80%", marginTop: 20 },
   row: {
     flexDirection: "row",
     alignItems: "center",
     width: "80%",
     display: "flex",
-    justifyContent: "space-between",
   },
 });

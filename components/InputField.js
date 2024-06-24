@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { TextInput } from "react-native-paper";
+import { colors } from "../contants/colors";
 
 export default function InputField({
   label,
@@ -8,19 +9,22 @@ export default function InputField({
   onChangeText,
   keyboardType = "default",
   editable = true,
+  ...props
 }) {
   return (
     <View style={styles.inputContainer}>
       {/* <Text>{label}</Text> */}
       <TextInput
-        underlineStyle={{
-          borderColor: "#3333",
-        }}
+        {...props}
         value={value}
         onChangeText={onChangeText}
         keyboardType={keyboardType}
         editable={editable}
         label={label}
+        style={{ backgroundColor: "white" }}
+        activeUnderlineColor={colors.secondary}
+        placeholderTextColor={"#00ee"}
+        underlineColor={colors.primary}
       />
     </View>
   );
@@ -28,7 +32,6 @@ export default function InputField({
 
 const styles = StyleSheet.create({
   inputContainer: {
-    marginBottom: 10,
     width: "80%",
   },
   input: {

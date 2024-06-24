@@ -16,6 +16,7 @@ export default function ButtonGroup({ buttons }) {
 
 const styles = StyleSheet.create({
   buttonContainer: {
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     gap: 10,
