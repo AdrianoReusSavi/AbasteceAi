@@ -92,21 +92,23 @@ export default function DistanceScreen({ route, navigation }) {
         onChangeText={setDistance}
         keyboardType="numeric"
       />
-      <InputField
-        label="Consumo do Veículo (km/L):"
-        value={kmPerLiter}
-        onChangeText={setKmPerLiter}
-        keyboardType="numeric"
-      />
-      <DefaultButton
-        mode="contained"
-        icon="table-search"
-        containerColor={"white"}
-        iconColor={colors.primary}
-        onPress={() => navigation.navigate("GptScreen")}
-      >
-        Buscar o consumo do meu veículo
-      </DefaultButton>
+
+      <View style={styles.row}>
+        <InputField
+          label="Consumo do Veículo (km/L):"
+          value={kmPerLiter}
+          onChangeText={setKmPerLiter}
+          keyboardType="numeric"
+        />
+        <DefaultIconButton
+          mode="contained"
+          icon="table-search"
+          containerColor={"white"}
+          iconColor={colors.primary}
+          onPress={() => navigation.navigate("GptScreen")}
+        />
+      </View>
+
       <InputField
         label="Preço da Gasolina (R$/L):"
         value={fuelPrice}
@@ -118,7 +120,6 @@ export default function DistanceScreen({ route, navigation }) {
           label="Custo Estimado (R$):"
           value={totalCost}
           editable={false}
-          disabled
         />
       )}
       <View style={{ width: "80%" }}>
