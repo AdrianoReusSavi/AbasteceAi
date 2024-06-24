@@ -1,5 +1,5 @@
 ﻿import React, { useState, useEffect } from "react";
-import { StyleSheet, View, Alert, Button, Text } from "react-native";
+import { StyleSheet, View, Alert } from "react-native";
 import BottomTabBar from "../components/BottomTabBar";
 import { addTrip } from "../services/tripService";
 import { loadConfig } from "../services/configService";
@@ -7,7 +7,6 @@ import InputField from "../components/InputField";
 import ButtonGroup from "../components/ButtonGroup";
 import { DefaultButton } from "../components/DefaultButton";
 import { DefaultIconButton } from "../components/IconButton";
-import { MD3Colors } from "react-native-paper";
 import { colors } from "../contants/colors";
 
 export default function DistanceScreen({ route, navigation }) {
@@ -91,6 +90,7 @@ export default function DistanceScreen({ route, navigation }) {
         value={distance}
         onChangeText={setDistance}
         keyboardType="numeric"
+        style={styles.inputField}
       />
 
       <View style={styles.row}>
@@ -99,6 +99,7 @@ export default function DistanceScreen({ route, navigation }) {
           value={kmPerLiter}
           onChangeText={setKmPerLiter}
           keyboardType="numeric"
+          style={{ flex: 1 }}
         />
         <DefaultIconButton
           mode="contained"
@@ -114,33 +115,23 @@ export default function DistanceScreen({ route, navigation }) {
         value={fuelPrice}
         onChangeText={setFuelPrice}
         keyboardType="numeric"
+        style={styles.inputField}
       />
       {totalCost && (
         <InputField
           label="Custo Estimado (R$):"
           value={totalCost}
           editable={false}
+          style={styles.inputField}
         />
       )}
-      <View style={{ width: "80%" }}>
-        <ButtonGroup
-          buttons={[
-            { title: "Calcular Custo", onPress: calculateCost },
-            { title: "Salvar", onPress: handleSave },
-          ]}
-        />
+      <View style={styles.buttonGroup}>
+        <DefaultButton onPress={handleClear} color={colors.danger}>
+          Limpar
+        </DefaultButton>
+        <DefaultButton onPress={handleSave}>Salvar</DefaultButton>
+        <DefaultButton onPress={calculateCost}>Calcular Custo</DefaultButton>
       </View>
-
-      <DefaultButton
-        style={{
-          width: "80%",
-          borderRadius: 4,
-          backgroundColor: colors.danger,
-        }}
-        onPress={handleClear}
-      >
-        Limpar
-      </DefaultButton>
       <BottomTabBar
         state={{
           routes: [
@@ -159,17 +150,26 @@ export default function DistanceScreen({ route, navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: "100%",
-    marginTop: 20,
-    gap: 10,
-    display: "flex",
-    flexDirection: "column",
+    flex: 1,
+    padding: 20,
     alignItems: "center",
+    gap: 10,
   },
   row: {
     flexDirection: "row",
     alignItems: "center",
-    width: "80%",
+    justifyContent: "space-between",
+    width: "100%",
+  },
+  inputField: {
+    width: "100%",
+  },
+  buttonGroup: {
+    width: "100%",
+    alignItems: "center",
     display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    gap: 10,
   },
 });

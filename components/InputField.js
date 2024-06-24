@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet } from "react-native";
 import { TextInput } from "react-native-paper";
 import { colors } from "../contants/colors";
 
@@ -12,30 +12,23 @@ export default function InputField({
   ...props
 }) {
   return (
-    <View style={styles.inputContainer}>
-      {/* <Text>{label}</Text> */}
-      <TextInput
-        {...props}
-        value={value}
-        onChangeText={onChangeText}
-        keyboardType={keyboardType}
-        editable={editable}
-        label={label}
-        style={[{ backgroundColor: "white" }, { ...props.style }]}
-        activeUnderlineColor={colors.secondary}
-        underlineColor={colors.primary}
-      />
-    </View>
+    <TextInput
+      {...props}
+      value={value}
+      onChangeText={onChangeText}
+      keyboardType={keyboardType}
+      editable={editable}
+      label={label}
+      style={[styles.input, props.style]}
+      activeUnderlineColor={colors.secondary}
+      underlineColor={colors.primary}
+    />
   );
 }
 
 const styles = StyleSheet.create({
-  inputContainer: {
-    width: "80%",
-  },
   input: {
-    height: 40,
-    borderWidth: 1,
-    paddingHorizontal: 10,
+    width: "100%",
+    backgroundColor: "white",
   },
 });

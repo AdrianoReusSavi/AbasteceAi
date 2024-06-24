@@ -35,25 +35,37 @@ export default function SettingsScreen({ navigation }) {
 
   return (
     <View style={styles.container}>
-      <InputField
-        style={{ width: "100%" }}
-        label="Preço da Gasolina (R$/L):"
-        value={fuelPrice}
-        onChangeText={setFuelPrice}
-        keyboardType="numeric"
-      />
-      <InputField
-        style={{ width: "100%" }}
-        label="Consumo do Veículo (km/L):"
-        value={kmPerLiter}
-        onChangeText={setKmPerLiter}
-        keyboardType="numeric"
-      />
+      <View style={styles.column}>
+        <InputField
+          label="Preço da Gasolina (R$/L):"
+          value={fuelPrice}
+          onChangeText={setFuelPrice}
+          keyboardType="numeric"
+        />
+        <InputField
+          label="Consumo do Veículo (km/L):"
+          value={kmPerLiter}
+          onChangeText={setKmPerLiter}
+          keyboardType="numeric"
+        />
+      </View>
       <ButtonGroup
         buttons={[
-          { title: "Salvar", onPress: handleSaveConfig },
           { title: "Limpar Histórico", onPress: handleClearHistory },
+          { title: "Salvar", onPress: handleSaveConfig },
         ]}
+      />
+      <BottomTabBar
+        state={{
+          routes: [
+            { name: "Map" },
+            { name: "Distance" },
+            { name: "History" },
+            { name: "Settings" },
+          ],
+        }}
+        descriptors={{}}
+        navigation={navigation}
       />
     </View>
   );
@@ -61,12 +73,15 @@ export default function SettingsScreen({ navigation }) {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    width: "80%",
-    margin: "auto",
-    justifyContent: "center",
     alignItems: "center",
+    justifyContent: "center",
     padding: 20,
+  },
+  column: {
+    flexDirection: "column",
+    alignItems: "center",
+    width: "100%",
     gap: 10,
+    marginBottom: 10,
   },
 });
