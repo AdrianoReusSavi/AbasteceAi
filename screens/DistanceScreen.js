@@ -83,12 +83,11 @@ export default function DistanceScreen({ route, navigation }) {
 
             <View style={styles.modal}>
                 <InputFieldConsumo label="Consumo do Veículo (km/L):" value={kmPerLiter} onChangeText={setKmPerLiter} keyboardType="numeric" />
-                <Button
-                    title='press'
+            </View>
+            <Button
+                    title='Descubra o consumo do seu veículo'
                     onPress={() => navigation.navigate('GptScreen')}
                 />
-            </View>
-
             <InputField label="Custo Estimado (R$):" value={totalCost} editable={false} />
             <ButtonGroup buttons={[
                 { title: "Calcular Custo", onPress: calculateCost },
